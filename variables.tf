@@ -8,7 +8,7 @@ variable "cidr_blocks" {
 }
 
 # AVAILABILITY ZONES
-variable "availability_zone" {
+variable "availability_zones" {
   type = list(string)
 }
 

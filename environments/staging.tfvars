@@ -3,7 +3,7 @@ environment= "staging"
 # example of list collection
 ingress_ports = [22,80,443]
 availability_zones = ["us-east-1a","us-east-1b","us-east-1c"]
-cidr_blocks=[""10.0.1.0/24","10.0.2.0/24","10.0.3.0/24""]
+cidr_blocks=["172.31.1.0/24","172.31.2.0/24","172.31.3.0/24"]
 
 # nested object
 instances = {

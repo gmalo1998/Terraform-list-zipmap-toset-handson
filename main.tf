@@ -20,7 +20,7 @@ resource "aws_default_vpc" "aws_default_vpc" {}
 # EC2 subnets
 resource "aws_subnet" "default_subnet" {
   for_each = zipmap(
-    var.availability_zone,
+    var.availability_zones,
     var.cidr_blocks
   )
  
@@ -40,15 +40,17 @@ resource "aws_security_group" "ec2_security_groups" {
   description = "This section is for the security groups"
   name        = "${var.environment}-security-group"
   vpc_id      = aws_default_vpc.aws_default_vpc.id
-  for_each = toset(var.ingress_ports)
 
-  ingress {
-    description = "Inbound traffic on port ${each.value}"
-    from_port   = each.value
-    to_port     = each.value
+   dynamic "ingress" {
+    for_each = var.ingress_ports
+      content {
+    description = "Inbound traffic on port ${ingress.value}"
+    from_port   = ingress.value
+    to_port     = ingress.value
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+   }
   
   egress {
     description = "Outbound rule for EC2 instance"
@@ -73,7 +75,7 @@ resource "aws_instance" "ec2_instance" {
   ami                    = data.aws_ami.ubuntu_ami.id
   vpc_security_group_ids = [aws_security_group.ec2_security_groups.id]
   key_name               = var.ec2_key
-  subnet_id = aws_subnet.default_subnet.id
+  subnet_id = aws_subnet.default_subnet["us-east-1a"].id
   monitoring = each.value.monitoring.enabled
   root_block_device {
     volume_size = each.value.volume_size
