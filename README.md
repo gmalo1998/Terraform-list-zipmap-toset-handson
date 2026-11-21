@@ -39,3 +39,6 @@ terraform plan
 ```
 
 **Objective:** Prevent invalid infrastructure configurations through Terraform input validation before AWS resource provisioning.
+
+
+> Your code has corrupted and you need to revert or rollback your changes
