@@ -46,3 +46,6 @@ terraform plan
 
 *******************Latest deployment configuration updated.***********************
 
+
+
+#####################Practicing git reset soft command.#################################
