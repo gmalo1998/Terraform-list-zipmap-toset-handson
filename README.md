@@ -42,3 +42,5 @@ terraform plan
 
 ******Monitoring configuration added. ***
 =========Testing older commit rollback.   ==================
+
+*******************Latest deployment configuration updated.***********************
